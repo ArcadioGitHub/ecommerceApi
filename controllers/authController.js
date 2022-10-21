@@ -13,12 +13,12 @@ const login = async (req, res, next) => {
     } else {
         try {
             const user = await User.findOne({ userName: req.body.userName });
-            if(!user){
+            if (!user) {
                 res.status(status.UNAUTHORIZED).json({ error: "invalid credentials" });
             } else {
                 const hashedPass = CryptoJS.AES.decrypt(user.password, process.env.USER_PASS);
                 const originalPassword = hashedPass.toString(CryptoJS.enc.Utf8);
-                if(originalPassword !== req.body.password) {
+                if (originalPassword !== req.body.password) {
                     res.status(status.UNAUTHORIZED).json({ error: "invalid credentials" });
                 } else {
                     const accessToken = jwt.sign({
@@ -36,5 +36,4 @@ const login = async (req, res, next) => {
         }
     }
 }
-
 module.exports = { login };
