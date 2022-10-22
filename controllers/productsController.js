@@ -8,7 +8,6 @@ const createProduct = async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         const errorArray = errors.array();
-        console.log(errorArray);
         return res.status(status.BAD_REQUEST).json(errorArray[errorArray.length - 1]);
     } else {
         const newProduct = new Product(req.body);
@@ -108,6 +107,4 @@ const getAllProducts = async (req, res) => {
         res.status(status.INTERNAL_SERVER_ERROR).json(err)
     }
 }
-
-
 module.exports = { createProduct, updateProduct, deleteProduct, getProductById, getAllProducts };

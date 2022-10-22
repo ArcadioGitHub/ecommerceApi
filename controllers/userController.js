@@ -125,5 +125,4 @@ const getUserStats = async (req, res) => {
         res.status(status.INTERNAL_SERVER_ERROR).json(err)
     }
 }
-
 module.exports = { createUser, updateUser, deleteUser, getUserById, getAllUsers, getUserStats };
