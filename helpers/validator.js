@@ -19,5 +19,15 @@ exports.validate = (method) => {
         body('password').not().isEmpty().isLength({ min: 5 }).withMessage('password  field must have more than 5 characters'),
       ]
     }
+
+    case 'CreateProduct': {
+      return [
+        body('title').not().isEmpty().isLength({ min: 5 }).withMessage('Title field can not be empty'),
+        body('description').not().isEmpty().isLength({ min: 5 }).isString().withMessage('Description field must have more than 5 characters'),
+        body('img').not().isEmpty().isLength({ min: 1 }).withMessage('Igm field can not be empty'),
+        body('price').not().isEmpty().isLength({ min: 1 }).withMessage('Price field can not be empty'),
+        body('price').not().isEmpty().isLength({ min: 1 }).isNumeric().withMessage('Price field must be a number'),
+      ]
+    }
   }
 }

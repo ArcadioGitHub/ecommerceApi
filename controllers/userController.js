@@ -18,10 +18,8 @@ const createUser = async (req, res) => {
         try {
             const savedUser = await newUser.save();
             res.status(status.CREATED).json(savedUser);
-            res.end();
         } catch (err) {
             if (err && err.code === 11000) {
-                console.log(err)
                 res.status(status.BAD_REQUEST).json({
                     error: "duplicatedKey",
                     message: "duplicated keys are not allowed, please update the duplicated ones.",
@@ -75,6 +73,7 @@ const deleteUser = async (req, res) => {
 }
 
 const getUserById = async (req, res) => {
+
     if (req.params.id == ':id') {
         res.status(status.BAD_REQUEST).json({ error: "The ID parameter is mandatory to get a user" });
     } else if (await User.findById(req.params.id) == null) {
@@ -91,6 +90,7 @@ const getUserById = async (req, res) => {
 }
 
 const getAllUsers = async (req, res) => {
+
     try {
         const users = await User.find();
         if (users.length == 0) {
@@ -99,11 +99,12 @@ const getAllUsers = async (req, res) => {
             res.status(status.OK).json(users);
         }
     } catch (err) {
-        res.status(500).json(err)
+        res.status(status.INTERNAL_SERVER_ERROR).json(err)
     }
 }
 
 const getUserStats = async (req, res) => {
+
     const date = new Date();
     const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
 

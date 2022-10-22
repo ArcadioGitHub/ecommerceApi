@@ -5,16 +5,16 @@ const router = require("express").Router();
 //UPDATE
 router.put("/updateUser/:id", verifyTokenAndAuthorization, updateUser);
 
-// DELETE
+//DELETE
 router.delete("/deleteUser/:id", verifyTokenAndAuthorization, deleteUser);
 
 //GET
 router.get("/getUser/:id", verifyTokenAndAdmin, getUserById);
 
-// GET ALL USERS
+//GET ALL USERS
 router.get("/getUsers", verifyTokenAndAdmin, getAllUsers);
 
-// GET USERS STATS
+//GET USERS STATS
 router.get("/getUsersStats", verifyTokenAndAdmin, getUserStats);
 
 module.exports = router;
